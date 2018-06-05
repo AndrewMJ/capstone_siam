@@ -34,6 +34,43 @@ public class DeviceServices {
 	@PostConstruct
 	public void init() throws IOException {
 		String subnet = "192.168.88.";
+		scanSubnet(subnet);
+		
+	}
+	
+	public Device getDeviceByIp(String host) {
+		return deviceDao.getDeviceByIp(host);
+	}
+	
+	public Iterable<Device> getAllDevices() {
+		return deviceDao.getAllDevices();
+	}
+	
+	public ArrayList<Message> results() {
+		ArrayList<Message> results = new ArrayList<>();
+		Iterable<Device> deviceList = getAllDevices();
+		Iterator<Device> deviceIter = deviceList.iterator();
+		LOGGER.info("iterating all devices in db.....");
+		while(deviceIter.hasNext()) {
+			Device device = deviceIter.next();
+			String host = device.getIpaddr();
+			request = IcmpPingUtil.createIcmpPingRequest();
+			request.setHost(host);
+			response = IcmpPingUtil.executePingRequest(request);
+			boolean successFlag = response.getSuccessFlag();
+			String message = response.getErrorMessage();
+			String hostMsg = "IP ADDRESS: " + host;
+			String successMsg = "SUCCESS: " + successFlag;
+			String messageFromPing = "MESSAGE: " + message;
+			LOGGER.info(hostMsg);
+			LOGGER.info(successMsg);
+			LOGGER.info(messageFromPing);
+			results.add(new Message(host, successFlag, messageFromPing, new Date()));
+		}
+		return results;
+	}
+	
+	public void scanSubnet(String subnet) throws IOException {
 		LOGGER.info("Scanning all ip addresses in " + subnet);
 		Runtime rt = Runtime.getRuntime();
     	Process process = rt.exec("nmap -sP " + subnet + "*");
@@ -75,38 +112,6 @@ public class DeviceServices {
     			}
     		}
     	}
-	}
-	
-	public Device getDeviceByIp(String host) {
-		return deviceDao.getDeviceByIp(host);
-	}
-	
-	public Iterable<Device> getAllDevices() {
-		return deviceDao.getAllDevices();
-	}
-	
-	public ArrayList<Message> results() {
-		ArrayList<Message> results = new ArrayList<>();
-		Iterable<Device> deviceList = getAllDevices();
-		Iterator<Device> deviceIter = deviceList.iterator();
-		LOGGER.info("iterating all devices in db.....");
-		while(deviceIter.hasNext()) {
-			Device device = deviceIter.next();
-			String host = device.getIpaddr();
-			request = IcmpPingUtil.createIcmpPingRequest();
-			request.setHost(host);
-			response = IcmpPingUtil.executePingRequest(request);
-			boolean successFlag = response.getSuccessFlag();
-			String message = response.getErrorMessage();
-			String hostMsg = "IP ADDRESS: " + host;
-			String successMsg = "SUCCESS: " + successFlag;
-			String messageFromPing = "MESSAGE: " + message;
-			LOGGER.info(hostMsg);
-			LOGGER.info(successMsg);
-			LOGGER.info(messageFromPing);
-			results.add(new Message(host, successFlag, messageFromPing, new Date()));
-		}
-		return results;
 	}
 
 }
