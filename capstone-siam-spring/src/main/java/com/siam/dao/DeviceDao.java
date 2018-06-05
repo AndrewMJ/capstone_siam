@@ -21,6 +21,7 @@ public class DeviceDao {
 	private final String WHERE_MAC = "WHERE macaddr=";
 	private final String WHERE_IP = "WHERE ipaddr=";
 	private final String INSERT_DEVICE = "INSERT INTO device (macaddr, ipaddr, company) VALUES (?,?,?)";
+	private final String UPDATE_IP = "UPDATE device SET \'ipaddr\'=";
 	private final String DELETE_DEVICE = "DELETE FROM device WHERE id=";
 	private final Logger LOGGER = LoggerFactory.getLogger(DeviceDao.class);
 
@@ -31,6 +32,14 @@ public class DeviceDao {
 		return jdbcTemplate.queryForObject(GET_DEVICE + WHERE_IP + "\'" + ipaddr + "\'", new BeanPropertyRowMapper<>(Device.class));
 	}
 	
+	public Device getDeviceByMac(String macaddr) {
+		return jdbcTemplate.queryForObject(GET_DEVICE + WHERE_MAC + "\'" + macaddr + "\'", new BeanPropertyRowMapper<>(Device.class));
+	}
+	
+	public Integer countDeviceByIp(String ipaddr) {
+		return jdbcTemplate.queryForObject(COUNT_DEVICE + WHERE_MAC + "\'" + ipaddr + "\'", Integer.class);
+	}
+	
 	public Integer countDeviceByMac(String macaddr) {
 		return jdbcTemplate.queryForObject(COUNT_DEVICE + WHERE_MAC + "\'" + macaddr + "\'", Integer.class);
 	}
@@ -38,6 +47,11 @@ public class DeviceDao {
 	public int insertDevice(String macaddr, String ipaddr, String company) {
 		LOGGER.info("received: " + macaddr + " " + ipaddr + " " + company);
 		return jdbcTemplate.update(INSERT_DEVICE, new Object[] {macaddr, ipaddr, company});
+	}
+	
+	public int updateDevice(String macaddr, String ipaddr) {
+		LOGGER.info("received: " + ipaddr + " as IP address of " + macaddr);
+		return jdbcTemplate.update(UPDATE_IP + ipaddr + " " + WHERE_MAC + macaddr);
 	}
 	
 	public int deleteDeviceById(Integer id) {

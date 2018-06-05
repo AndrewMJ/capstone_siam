@@ -63,6 +63,11 @@ public class DeviceServices {
     				} else {
     					// Check if there are same ip addresses!!
     					LOGGER.info("Machine with " + macAddr + " is already in DB");
+    					LOGGER.info("Checking IP address of " + macAddr);
+    					if(!deviceDao.getDeviceByMac(macAddr).getIpaddr().equals(ipAddr)) {
+    						deviceDao.updateDevice(macAddr, ipAddr);
+    						LOGGER.info(macAddr + "'s IP address has changed to " + ipAddr);
+    					}
     				}
 	    			ipAddr = null;
 	    			macAddr = null;
