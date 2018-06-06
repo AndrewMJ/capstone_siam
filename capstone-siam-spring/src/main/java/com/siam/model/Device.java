@@ -46,4 +46,5 @@ public class Device {
 	public void setMacaddr(String macaddr) {
 		this.macaddr = macaddr;
 	}
+
 }

@@ -1,3 +1,5 @@
+package com.siam.test;
+
 import com.siam.PcapExample
 import spock.lang.Specification
 
