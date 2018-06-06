@@ -46,6 +46,21 @@ public class DeviceServices {
 		return deviceDao.getAllDevices();
 	}
 	
+	public Message singleDevice(String host) {
+		request = IcmpPingUtil.createIcmpPingRequest();
+		request.setHost(host);
+		response = IcmpPingUtil.executePingRequest(request);
+		boolean successFlag = response.getSuccessFlag();
+		String message = response.getErrorMessage();
+		String hostMsg = "IP ADDRESS: " + host;
+		String successMsg = "SUCCESS: " + successFlag;
+		String messageFromPing = "MESSAGE: " + message;
+		LOGGER.info(hostMsg);
+		LOGGER.info(successMsg);
+		LOGGER.info(messageFromPing);
+		return new Message(host, successFlag, messageFromPing, new Date());
+	}
+	
 	public ArrayList<Message> results() {
 		ArrayList<Message> results = new ArrayList<>();
 		Iterable<Device> deviceList = getAllDevices();
