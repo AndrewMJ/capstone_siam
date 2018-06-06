@@ -11,8 +11,9 @@ public class Device {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
+	private String macaddr;
 	private String ipaddr;
-	private String type;
+	private String company;
 	
 	public Integer getId() {
 		return id;
@@ -22,8 +23,12 @@ public class Device {
 		return ipaddr;
 	}
 	
-	public String getType() {
-		return type;
+	public String getCompany() {
+		return company;
+	}
+	
+	public String getMacaddr() {
+		return macaddr;
 	}
 	
 	public void setId(Integer id) {
@@ -34,7 +39,11 @@ public class Device {
 		this.ipaddr = ipaddr;
 	}
 	
-	public void setType(String type) {
-		this.type = type;
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	
+	public void setMacaddr(String macaddr) {
+		this.macaddr = macaddr;
 	}
 }

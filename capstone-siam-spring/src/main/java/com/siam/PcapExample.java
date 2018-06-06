@@ -25,16 +25,42 @@ public class PcapExample {
 		
 	}
 	
-	public static void main (final String[ ] args) throws Exception {
-		// request
-		String subnet = "192.168.88.";
-		for(int i = 1; i <= 255; i++) {
-			String host = subnet + i;
-			System.out.println(host + " ====================================");
-			sendPing(host);
-			System.out.println("=============================================");
-		}
-		// repeat a few times
-		
-	}
+	public static boolean checkSuccess(String host){
+        final IcmpPingRequest request = IcmpPingUtil.createIcmpPingRequest ();
+        request.setHost (host);
+        final IcmpPingResponse response = IcmpPingUtil.executePingRequest (request);
+        return response.getSuccessFlag();
+    }
+	
+	public static boolean checkTimeoutFlag(String host){
+        final IcmpPingRequest request = IcmpPingUtil.createIcmpPingRequest ();
+        request.setHost (host);
+        final IcmpPingResponse response = IcmpPingUtil.executePingRequest (request);
+        return response.getTimeoutFlag();
+    }
+	
+	public static String returnStatement(String host){
+        String str = "";
+        if(checkSuccess(host) && !checkTimeoutFlag(host)) {
+            str =  "System is up and running";
+        }else if (!checkSuccess(host) && !checkTimeoutFlag(host)){
+            str = "System is not working";
+        }else if (!checkSuccess(host) && checkTimeoutFlag(host)){
+            str = "System is shutdown";
+        }
+        return str;
+    }
+	
+//	  public static void main (final String[ ] args) throws Exception {
+//	        // request
+//	        String subnet = "192.168.88.";
+//	        for(int i = 1; i <= 255; i++) {
+//	            String host = subnet + i;
+//	            System.out.println(host + " ====================================");
+//	            sendPing(host);
+//	            System.out.println("=============================================");
+//	        }
+//	        // repeat a few times
+//	        
+//	    }
 }

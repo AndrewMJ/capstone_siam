@@ -34,4 +34,9 @@ public class DeviceController {
 	public @ResponseBody ArrayList<Message> getDataFromPing() {
 		return deviceServices.results();
 	}
+	
+	@RequestMapping(value="data/{host}", method=RequestMethod.GET)
+	public @ResponseBody Message getDataFromSingleDevice(@PathVariable("host") String host) {
+		return deviceServices.singleDevice(host);
+	}
 }
