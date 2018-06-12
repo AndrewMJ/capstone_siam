@@ -12,30 +12,31 @@ public class Message {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-	private String macAddr;
-	private String ipAddr;
+	private Integer id;
+	private String macaddr;
+	private String ipaddr;
 	private int success;
 	private String message;
+	private int rtt;
 	private Date date;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getIpAddr() {
-		return ipAddr;
+		return ipaddr;
 	}
-	public void setIpAddr(String ipAddr) {
-		this.ipAddr = ipAddr;
+	public void setIpAddr(String ipaddr) {
+		this.ipaddr = ipaddr;
 	}
 	public String getMacAddr() {
-		return macAddr;
+		return macaddr;
 	}
-	public void setMacAddr(String macAddr) {
-		this.macAddr = macAddr;
+	public void setMacAddr(String macaddr) {
+		this.macaddr = macaddr;
 	}
 	public int isSuccess() {
 		return success;
@@ -48,6 +49,12 @@ public class Message {
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public int getRtt() {
+		return rtt;
+	}
+	public void setRtt(int rtt) {
+		this.rtt = rtt;
 	}
 	public Date getDate() {
 		return date;

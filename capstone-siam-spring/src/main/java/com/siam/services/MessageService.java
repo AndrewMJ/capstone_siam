@@ -1,5 +1,6 @@
 package com.siam.services;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.icmp4j.IcmpPingRequest;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.siam.dao.DeviceDao;
 import com.siam.dao.MessageDao;
 import com.siam.model.Device;
+import com.siam.model.Message;
 
 @Service
 public class MessageService {
@@ -21,6 +23,8 @@ public class MessageService {
 	private DeviceDao deviceDao;
 	@Autowired
 	private MessageDao messageDao;
+	@Autowired
+	private AsyncService asyncService;
 	private IcmpPingRequest request;
 	private IcmpPingResponse response;
 	private final Logger LOGGER = LoggerFactory.getLogger(MessageService.class);
@@ -29,30 +33,18 @@ public class MessageService {
 		return deviceDao.getAllDevices();
 	}
 	
+	public Iterable<Message> getAllMessages() {
+		return messageDao.getAllMessages();
+	}
+	
 	public void results() {
-		Iterable<Device> deviceList = getAllDevices();
+//		messageDao.deleteAllMessages();
+		ArrayList<Device> deviceList = (ArrayList<Device>) deviceDao.getAllConnectedDevices();
 		Iterator<Device> deviceIter = deviceList.iterator();
 		LOGGER.info("iterating all devices in db.....");
 		while(deviceIter.hasNext()) {
 			Device device = deviceIter.next();
-			String macaddr = device.getMacaddr();
-			String host = device.getIpaddr();
-			request = IcmpPingUtil.createIcmpPingRequest();
-			request.setHost(host);
-			response = IcmpPingUtil.executePingRequest(request);
-			boolean successFlag = response.getSuccessFlag();
-			int success;
-			if(successFlag) success = 1;
-			else success = 0;
-			String message = response.getErrorMessage();
-			String hostMsg = "IP ADDRESS: " + host;
-			String successMsg = "SUCCESS: " + successFlag;
-			String messageFromPing = "MESSAGE: " + message;
-			LOGGER.info(hostMsg);
-			LOGGER.info(successMsg);
-			LOGGER.info(messageFromPing);
-			if(messageDao.countMessageByMac(macaddr) == 0) messageDao.insertMessage(macaddr, host, success, messageFromPing);
-			else messageDao.updateMessage(macaddr, host, success, messageFromPing);
+			asyncService.run(device);
 		}
 	}
 
