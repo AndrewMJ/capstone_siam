@@ -36,7 +36,7 @@ class History extends Component{
 	render(){
 		const view = this.state.history
 		return(
-			<div>
+			<div>			
 			{JSON.stringify(view)}
 			</div>
 			)

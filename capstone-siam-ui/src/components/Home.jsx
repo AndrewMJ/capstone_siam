@@ -48,7 +48,8 @@ class Home extends Component {
 					</h6>
 					<h6> IP Address: {elem.ipAddr}
 					<div style = {{float: "right"}}>
-					 <img src = {this.deviceImage(elem.id)} />
+					
+					 <img src = "/images/printer.jpg" />
 					 </div>
 						
 					</h6> 	
@@ -125,12 +126,12 @@ class Home extends Component {
 			IP Address: ${res.data.ipaddr}<br>
 			Company: ${res.data.company}<br>
 			Type: ${res.data.type}<br>
-			Speed: ${res.data.rtt}<br> </h5>
+			Speed: ${res.data.rtt} ms per packet <br> </h5>
 			`
 			swal({
 				
 				html: details
-			}
+				}
 			)
 		})
 		.catch((error)=>{
@@ -151,7 +152,7 @@ class Home extends Component {
 			<div>
 				<div className = "row">
 					<div className = "col-sm-12 text-center">
-						<h1> Connected Devices </h1>
+						<h2> We need a title that goes here </h2>
 					</div>
 				</div>
 				<div className = "container">
