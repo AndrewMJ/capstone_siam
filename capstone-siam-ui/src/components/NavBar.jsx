@@ -14,10 +14,12 @@ class NavBar extends Component{
 					<ul className = "nav navbar-nav">
 						<li> <Link to="/home" className="navbar-brand">Home</Link> </li>
 					</ul>
-					<ul className = "nav navbar-nav navbar-right">
-						<li> <h1> Test </h1>
-						</li>
-					</ul>
+					<form className="navbar-form navbar-right" role="search">
+    					<div className="form-group">
+        					<input type="text" class="form-control" placeholder="Search"/>
+    					</div>
+    					<button type="submit" class="btn btn-default">Submit</button>
+					</form>
 				</div>
 			</nav>
 		)
