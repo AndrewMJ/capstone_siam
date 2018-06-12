@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.siam.config.DeviceRepository;
 import com.siam.model.Device;
-import com.siam.services.DeviceServices;
 
 @Component
 public class DeviceDao {
