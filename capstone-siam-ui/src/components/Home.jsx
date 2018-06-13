@@ -31,7 +31,7 @@ class Home extends Component {
 	showData()  {
 		return this.state.device.map((elem, index) => 
 
-			<div className = "data col-sm-4" key={index}>
+			<div className = "data col-sm-12" key={index}>
 				<div> 
 					<h6> Device Number: {elem.id} 
 					<div style = {{float: "right"}}>
