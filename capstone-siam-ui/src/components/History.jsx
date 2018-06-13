@@ -57,19 +57,19 @@ class History extends Component{
 							this.setState({
 								graphData: stateCopy
 							})
-						} else if(splitString[j] === " Message: SUCCESS " && splitString[4].substring(0, 17) === " Date: Wed Jun 14"){
+						} else if(splitString[j] === " Message: SUCCESS " && splitString[4].substring(0, 17) === " Date: Thu Jun 14"){
 							let stateCopy = this.state.graphData.slice()
 							stateCopy[0].data[1].y++
 							this.setState({
 								graphData: stateCopy
 							})
-						} else if(splitString[j] === " Message: IP_DEST_HOST_UNREACHABLE " && splitString[4].substring(0, 17) === " Date: Wed Jun 14"){
+						} else if(splitString[j] === " Message: IP_DEST_HOST_UNREACHABLE " && splitString[4].substring(0, 17) === " Date: Thu Jun 14"){
 							let stateCopy = this.state.graphData.slice()
 							stateCopy[1].data[1].y++
 							this.setState({
 								graphData: stateCopy
 							})						
-						} else if(splitString[j].includes(" Message: Timeout reached after " && splitString[4].substring(0, 17) === " Date: Wed Jun 14")) {
+						} else if(splitString[j].includes(" Message: Timeout reached after " && splitString[4].substring(0, 17) === " Date: Thu Jun 14")) {
 							let stateCopy = this.state.graphData.slice()
 							stateCopy[2].data[1].y++
 							this.setState({
