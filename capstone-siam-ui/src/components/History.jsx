@@ -12,17 +12,16 @@ class History extends Component{
 			graphData: [ 
 					   {
 					    label: "Success",
-					    data: [{ x: "Day 1", y: 0}, { x: "Day 2", y: 7}]
+					    data: [{ x: "6/13", y: 0}, { x: "6/14", y: 0}]
 					  },
 					  {
-					    label: "Error",
-					    data: [{ x: "Day 1", y: 0 }, { x: "Day 2", y: 7}]
+					    label: "Disconnected",
+					    data: [{ x: "6/13", y: 0 }, { x: "6/14", y: 0}]
 					  },
 					  {
-					    label: "Warning",
-					    data: [{ x: "Day 1", y: 0 }, { x: "Day 2", y: 9}]
+					    label: "Shutdown",
+					    data: [{ x: "6/13", y: 0 }, { x: "6/14", y: 0}]
 					  }
-					  
 					]
 		}
 	}
@@ -36,29 +35,46 @@ class History extends Component{
 			console.log(res.data)
 			for(let i=0; i<res.data.length; i++){
 					let splitString = res.data[i].split('/');
+					console.log(splitString)
 					
 					for(let j=0; j<splitString.length; j++){
 
-						if(splitString[j] === " Message: SUCCESS "){
+						if(splitString[j] === " Message: SUCCESS " && splitString[4].substring(0, 17) === " Date: Wed Jun 13"){
 							let stateCopy = this.state.graphData.slice()
 							stateCopy[0].data[0].y++
 							this.setState({
 								graphData: stateCopy
 							})
-						}else if(splitString[j] === " Message: IP_DEST_HOST_UNREACHABLE "){
+						} else if(splitString[j] === " Message: IP_DEST_HOST_UNREACHABLE " && splitString[4].substring(0, 17) === " Date: Wed Jun 13"){
 							let stateCopy = this.state.graphData.slice()
 							stateCopy[1].data[0].y++
 							this.setState({
 								graphData: stateCopy
-							})
-							
-						} else if(splitString[j].includes(" Message: Timeout reached after ")) {
+							})						
+						} else if(splitString[j].includes(" Message: Timeout reached after " && splitString[4].substring(0, 17) === " Date: Wed Jun 13")) {
 							let stateCopy = this.state.graphData.slice()
 							stateCopy[2].data[0].y++
 							this.setState({
 								graphData: stateCopy
 							})
-							
+						} else if(splitString[j] === " Message: SUCCESS " && splitString[4].substring(0, 17) === " Date: Wed Jun 14"){
+							let stateCopy = this.state.graphData.slice()
+							stateCopy[0].data[1].y++
+							this.setState({
+								graphData: stateCopy
+							})
+						} else if(splitString[j] === " Message: IP_DEST_HOST_UNREACHABLE " && splitString[4].substring(0, 17) === " Date: Wed Jun 14"){
+							let stateCopy = this.state.graphData.slice()
+							stateCopy[1].data[1].y++
+							this.setState({
+								graphData: stateCopy
+							})						
+						} else if(splitString[j].includes(" Message: Timeout reached after " && splitString[4].substring(0, 17) === " Date: Wed Jun 14")) {
+							let stateCopy = this.state.graphData.slice()
+							stateCopy[2].data[1].y++
+							this.setState({
+								graphData: stateCopy
+							})
 						}
 					}
 
