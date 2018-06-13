@@ -1,60 +1,50 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background-color: lavender;
+ margin: 0;
+ padding: 0;
+ font-family: sans-serif;
+ background-color: lavender;
 
 }
 
 .data {
-<<<<<<< HEAD
-	margin-bottom:20px;
-	
-}
-
-.icon {
-	width: 20px;
-	height: 20px;
-=======
-	width:350px;
-	margin:20px;
-	border: lavender 2px; 
-	background-color: white; 
-	border-radius: 5px;
-	padding-bottom:10px;
-	box-shadow: 0 7px 20px -5px rgba(0,0,0,0.2);
+    width:350px;
+    margin:20px;
+    border: lavender 2px; 
+    background-color: white; 
+    border-radius: 5px;
+    padding-bottom:10px;
+    box-shadow: 0 7px 20px -5px rgba(0,0,0,0.2);
 
 }
 
 .graph{
-	height: 300px;
-	position:relative;
+    height: 300px;
+    position:relative;
 
 }
 .legend{
-	position:absolute;
-	left: -119px;
-	top: 155px;
-	font-size: 24px;
-	transform: rotate(270deg);
-	font-family: 'Cormorant Unicase', serif;
+    position:absolute;
+    left: -119px;
+    top: 155px;
+    font-size: 24px;
+    transform: rotate(270deg);
+    font-family: 'Cormorant Unicase', serif;
 }
 
 .leg{
-	position:absolute;
-	left: 145px;
-	top: 329px;
-	font-size: 24px;
-	font-family: 'Cormorant Unicase', serif;
+    position:absolute;
+    left: 145px;
+    top: 329px;
+    font-size: 24px;
+    font-family: 'Cormorant Unicase', serif;
 
 }
-   
+ 
 .icon {
-	width: 20px;
-	height: 20px;
+    width: 20px;
+    height: 20px;
 }
 
 ul {
-  list-style-type: none;
->>>>>>> 39ac46d5fb32fe1a6c608fce8c65848a130941cd
+ list-style-type: none;
 }
