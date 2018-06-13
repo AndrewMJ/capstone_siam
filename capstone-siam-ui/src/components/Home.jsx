@@ -47,15 +47,12 @@ class Home extends Component {
 						
 					</h6>
 					<h6> IP Address: {elem.ipAddr}
-					<div style = {{float: "right"}}>
 					
-					 <img src = "/images/printer.jpg" />
-					 </div>
 						
 					</h6> 	
 					 <button onClick = { ()=> {this.message(elem.message)}} className = {this.buttonStatus(elem.message)}> Status </button>
 					 <div style = {{float: "right"}}> 
-						<button onClick = { ()=> {this.showDetails(elem.id)}} className = "btn btn-sm btn-primary"> Details </button>	
+						<button onClick = { ()=> {this.showDetails(elem.id)}} className = "btn btn-sm btn-basic"> Details </button>	
 					 	</div>
 				</div>
 			</div>
@@ -98,25 +95,25 @@ class Home extends Component {
 		}
 	}
 
-	deviceImage(id){
-			axios.get(`http://35.237.107.174:8080/data/${id}`)
-		.then((res) => {
-			const prefix = './images/'
-			if (res.data.type == "printer"){
-				return prefix + 'printer.jpg'
-		}
-		else {
-			return prefix + 'computer.jpg'
-		}
+	// deviceImage(id){
+	// 		axios.get(`http://35.237.107.174:8080/data/${id}`)
+	// 	.then((res) => {
+	// 		const prefix = './images/'
+	// 		if (res.data.type === "printer"){
+	// 			return prefix + 'printer.jpg'
+	// 	}
+	// 	else {
+	// 		return prefix + 'computer.jpg'
+	// 	}
 
-		})
-		.catch((error)=>{
-			console.log(error); 
-		})
+	// 	})
+	// 	.catch((error)=>{
+	// 		console.log(error); 
+	// 	})
 
 
 
-	}
+	// }
 
 	showDetails(id){
 		axios.get(`http://35.237.107.174:8080/data/${id}`)
@@ -152,7 +149,7 @@ class Home extends Component {
 			<div>
 				<div className = "row">
 					<div className = "col-sm-12 text-center">
-						<h2> We need a title that goes here </h2>
+						<h2> Shared Spaces Devices </h2>
 					</div>
 				</div>
 				<div className = "container">
