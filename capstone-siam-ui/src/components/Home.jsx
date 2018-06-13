@@ -10,29 +10,23 @@ class Home extends Component {
 	constructor(){
 		super(); 
 		this.state = {
-			device: [],
-			details: {}
+			device: []
 		}
 	}
 
 
 	componentDidMount() { 
-		
 		axios.get(`http://35.237.107.174:8080/data/`)
 		.then((res) => {
 			this.setState({
 				device: res.data
 
 			}); 
-
 		})
 		.catch((error)=>{
 			console.log(error); 
 		});
-
 	}
-
-
 
 	showData()  {
 		return this.state.device.map((elem, index) => 
@@ -48,19 +42,30 @@ class Home extends Component {
 					</h6>
 					<h6> IP Address: {elem.ipAddr}
 					<div style = {{float: "right"}}>
-					
-					 <img src = "/images/printer.jpg" />
+						{elem.type === "printer" &&
+							<img className="icon" src='https://png.icons8.com/metro/1600/print.png' />
+						}
+						{elem.type === "PC" &&
+							<img className="icon" src='https://image.flaticon.com/icons/svg/34/34100.svg' />
+						}
+						{elem.type === "iphone" && 
+							<img className="icon" src='https://image.freepik.com/free-icon/hand-with-a-mobile-phone_318-38051.jpg' />
+						}
+						{elem.type === "phone" &&
+							<img className="icon" src='https://image.freepik.com/free-icon/hand-with-a-mobile-phone_318-38051.jpg' />
+						}
 					 </div>
 						
 					</h6> 	
 					 <button onClick = { ()=> {this.message(elem.message)}} className = {this.buttonStatus(elem.message)}> Status </button>
 					 <div style = {{float: "right"}}> 
-						<button onClick = { ()=> {this.showDetails(elem.id)}} className = "btn btn-sm btn-primary"> Details </button>	
+						<button onClick = { ()=> {this.showDetails(elem.id)}} className = "btn btn-sm btn-basic"> Details </button>	
 					 	</div>
 				</div>
 			</div>
 			)
 	}
+
 	message(message){
 		console.log(message)
 			if(message == "SUCCESS"){
@@ -71,7 +76,7 @@ class Home extends Component {
 				)
 			}else if (message == "IP_DEST_HOST_UNREACHABLE"){
 				swal(
-					'System is not working',
+					'System is not connected',
 					"",
 					'error'
 					)
@@ -98,26 +103,6 @@ class Home extends Component {
 		}
 	}
 
-	deviceImage(id){
-			axios.get(`http://35.237.107.174:8080/data/${id}`)
-		.then((res) => {
-			const prefix = './images/'
-			if (res.data.type == "printer"){
-				return prefix + 'printer.jpg'
-		}
-		else {
-			return prefix + 'computer.jpg'
-		}
-
-		})
-		.catch((error)=>{
-			console.log(error); 
-		})
-
-
-
-	}
-
 	showDetails(id){
 		axios.get(`http://35.237.107.174:8080/data/${id}`)
 		.then((res) => {
@@ -126,7 +111,8 @@ class Home extends Component {
 			IP Address: ${res.data.ipaddr}<br>
 			Company: ${res.data.company}<br>
 			Type: ${res.data.type}<br>
-			Speed: ${res.data.rtt} ms per packet <br> </h5>
+			Speed: ${res.data.rtt} ms per packet <br> 
+			Last Connected Date: ${res.data.last_connected.substring(0,10)}<br></h5>
 			`
 			swal({
 				

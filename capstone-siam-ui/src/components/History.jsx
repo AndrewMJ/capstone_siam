@@ -34,13 +34,22 @@ class History extends Component{
 	}
 	
 	render(){
-		const view = this.state.history
-		return(
-			<div>			
-			{JSON.stringify(view)}
-			</div>
+		const view = this.state.history.map((data, index)=> {
+			const info = data.split(' / ')
+			console.log(info)
+			return(
+				<div>			
+					{data}
+				</div>
 			)
-		}
+		})
+		return (
+			<div>
+				{view}
+			</div>
+		)
+	}
+		
 
 
 
