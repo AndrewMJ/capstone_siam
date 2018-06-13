@@ -1,5 +1,7 @@
 package com.siam.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +16,26 @@ public class Device {
 	private String macaddr;
 	private String ipaddr;
 	private String company;
+	private String type;
+	private Integer connected;
+	private Date last_connected;
 	
+	public Integer getConnected() {
+		return connected;
+	}
+
+	public void setConnected(Integer connected) {
+		this.connected = connected;
+	}
+
+	public Date getLast_connected() {
+		return last_connected;
+	}
+
+	public void setLast_connected(Date last_connected) {
+		this.last_connected = last_connected;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -31,6 +52,10 @@ public class Device {
 		return macaddr;
 	}
 	
+	public String getType() {
+		return type;
+	}
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -45,6 +70,10 @@ public class Device {
 	
 	public void setMacaddr(String macaddr) {
 		this.macaddr = macaddr;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

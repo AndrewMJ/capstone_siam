@@ -106,8 +106,22 @@ class History extends Component{
 			</div>
 
 			
+		const view = this.state.history.map((data, index)=> {
+			const info = data.split(' / ')
+			console.log(info)
+			return(
+				<div>			
+					{data}
+				</div>
 			)
-		}
+		})
+		return (
+			<div>
+				{view}
+			</div>
+		)
+	}
+		
 
 
 
