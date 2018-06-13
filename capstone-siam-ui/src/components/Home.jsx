@@ -3,29 +3,50 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert2';
 
-
 class Home extends Component {
-
 
 	constructor(){
 		super(); 
 		this.state = {
 			device: []
 		}
+		this.pingInterval = {};
+		this.getData = this.getData.bind(this);
 	}
 
-
-	componentDidMount() { 
+	componentDidMount() {
 		axios.get(`http://35.237.107.174:8080/data/`)
 		.then((res) => {
 			this.setState({
 				device: res.data
-
 			}); 
 		})
 		.catch((error)=>{
 			console.log(error); 
 		});
+		this.pingInterval = setInterval(this.getData,5000);
+		// clearInterval(this.pingInterval)
+	}
+
+	getData() {
+		axios.get(`http://35.237.107.174:8080/data/`)
+		.then((res) => {
+			this.setState({
+				device: res.data
+			}); 
+		})
+		.catch((error)=>{
+			console.log(error); 
+		});
+	}
+
+	getCount() {
+		let count = 0;
+		this.state.device.map((elem, index)=>{
+			if(elem.message == "SUCCESS") count++;
+		})
+		console.log(count)
+		return count;
 	}
 
 	showData()  {
@@ -57,7 +78,8 @@ class Home extends Component {
 					 </div>
 						
 					</h6> 	
-					 <button onClick = { ()=> {this.message(elem.message)}} className = {this.buttonStatus(elem.message)}> Status </button>
+					 	<button onClick = { ()=> { this.message(elem.message) } } className = {this.buttonStatus(elem.message)}> Status 
+					 	</button>
 					 <div style = {{float: "right"}}> 
 						<button onClick = { ()=> {this.showDetails(elem.id)}} className = "btn btn-sm btn-basic"> Details </button>	
 					 	</div>
@@ -123,34 +145,23 @@ class Home extends Component {
 		.catch((error)=>{
 			console.log(error); 
 		})
-
-
 	}
 
-
-
-
-
-
 	render(){
-		
 		return(
 			<div>
 				<div className = "row">
 					<div className = "col-sm-12 text-center">
 						<h2> We need a title that goes here </h2>
+						<h3> Currently Connected Devices: {this.getCount()}</h3>
 					</div>
 				</div>
 				<div className = "container">
 					<div className = "row">
 							{this.showData()}
-
 					</div>
 					
 				</div>
-					
-				
-				
 			</div>
 		)
 	}
