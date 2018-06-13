@@ -25,7 +25,6 @@ class Home extends Component {
 			console.log(error); 
 		});
 		this.pingInterval = setInterval(this.getData,5000);
-		// clearInterval(this.pingInterval)
 	}
 
 	getData() {
@@ -52,7 +51,7 @@ class Home extends Component {
 	showData()  {
 		return this.state.device.map((elem, index) => 
 
-			<div className = "data col-sm-4" key={index}>
+			<div className = "data col-sm-12" key={index}>
 				<div> 
 					<h6> Device Number: {elem.id} 
 					<div style = {{float: "right"}}>
@@ -152,8 +151,9 @@ class Home extends Component {
 			<div>
 				<div className = "row">
 					<div className = "col-sm-12 text-center">
-						<h2> We need a title that goes here </h2>
+						<h2> Shared Spaces Devices </h2>
 						<h3> Currently Connected Devices: {this.getCount()}</h3>
+						
 					</div>
 				</div>
 				<div className = "container">
