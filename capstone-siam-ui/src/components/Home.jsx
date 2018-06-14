@@ -24,7 +24,7 @@ class Home extends Component {
 		.catch((error)=>{
 			console.log(error); 
 		});
-		this.pingInterval = setInterval(this.getData, 30000);
+		this.pingInterval = setInterval(this.getData, 6000);
 	}
 
 	getData() {

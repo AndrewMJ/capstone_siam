@@ -51,7 +51,7 @@ class History extends Component{
 							this.setState({
 								graphData: stateCopy
 							})						
-						} else if(splitString[j].includes(" Message: Timeout reached after " && splitString[4].substring(0, 17) === " Date: Wed Jun 13")) {
+						} else if(splitString[j].includes("Timeout reached after ") && splitString[4].substring(0, 17) === " Date: Wed Jun 13") {
 							let stateCopy = this.state.graphData.slice()
 							stateCopy[2].data[0].y++
 							this.setState({
@@ -69,7 +69,7 @@ class History extends Component{
 							this.setState({
 								graphData: stateCopy
 							})						
-						} else if(splitString[j].includes(" Message: Timeout reached after " && splitString[4].substring(0, 17) === " Date: Thu Jun 14")) {
+						} else if(splitString[j].includes(" Message: Timeout reached after ") && splitString[4].substring(0, 17) === " Date: Thu Jun 14") {
 							let stateCopy = this.state.graphData.slice()
 							stateCopy[2].data[1].y++
 							this.setState({
