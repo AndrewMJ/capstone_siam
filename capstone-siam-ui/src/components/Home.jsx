@@ -48,6 +48,34 @@ class Home extends Component {
 		return count;
 	}
 
+	getCount2() {
+		let count = 0;
+		this.state.device.map((elem, index)=>{
+			if(elem.message == "IP_DEST_HOST_UNREACHABLE") count++;
+		})
+		console.log(count)
+		return count;
+	}
+
+
+	getCount3() {
+		let count = 0;
+		this.state.device.map((elem, index)=>{
+			if(elem.message.includes("Timeout reached after")) count++;
+		})
+		console.log(count)
+		return count;
+	}
+
+	getCountT() {
+		let count = 0;
+		this.state.device.map((elem, index)=>{
+			if(elem.message) count++;
+		})
+		console.log(count)
+		return count;
+	}
+
 	showData()  {
 		return this.state.device.map((elem, index) => 
 
@@ -127,13 +155,12 @@ class Home extends Component {
 	showDetails(id){
 		axios.get(`http://35.237.107.174:8080/data/${id}`)
 		.then((res) => {
-			let details = `<h5> ID: ${res.data.id}<br>
+			let details = `<h5> Last Connected Date: ${res.data.last_connected.substring(0,10)}<br>
 			Mac Address: ${res.data.macaddr}<br> 
-			IP Address: ${res.data.ipaddr}<br>
+			Speed: ${res.data.rtt} ms per packet <br>
 			Company: ${res.data.company}<br>
-			Type: ${res.data.type}<br>
-			Speed: ${res.data.rtt} ms per packet <br> 
-			Last Connected Date: ${res.data.last_connected.substring(0,10)}<br></h5>
+			Type: ${res.data.type}<br> 
+			</h5>
 			`
 			swal({
 				
@@ -152,11 +179,23 @@ class Home extends Component {
 				<div className = "row">
 					<div className = "col-sm-12 text-center">
 						<h2> Shared Spaces Devices </h2>
-						<h3> Currently Connected Devices: {this.getCount()}</h3>
-						
 					</div>
+					<div className = "container">
+						<h5 className = "device" > 
+							Total Devices: {this.getCountT()} <br/>
+							Connected Devices: {this.getCount()} <br/>
+							Shutdown Devices: {this.getCount3()} <br/>
+							Disconnected Devices: {this.getCount2()}
+						</h5>
 				</div>
+
+				
+				</div>
+
+
 				<div className = "container">
+
+				
 					<div className = "row">
 							{this.showData()}
 					</div>

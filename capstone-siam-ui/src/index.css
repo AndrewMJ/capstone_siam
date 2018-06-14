@@ -48,3 +48,41 @@ body {
 ul {
  list-style-type: none;
 }
+
+.series.bar:nth-child(3) rect{
+    fill:green !important;
+}
+
+.series.bar:nth-child(2) rect{
+    fill:yellow !important;
+}
+
+.series.bar:nth-child(1) rect{
+    fill:red !important;
+}
+
+.font{
+    font-size: 24px;
+    font-family: 'Cormorant Unicase', serif;
+}
+
+.device{
+
+     width:190px;
+    border: lavender 2px; 
+    background-color: white; 
+    border-radius: 5px;
+    padding-left: 10px;
+    margin-top:50px;
+    padding-bottom: 5px;
+    box-shadow: 0 7px 20px -5px rgba(0,0,0,0.2);
+}
+
+.img{
+    width:500px;
+    height:500px;
+    border-radius:5px;
+    box-shadow: 0 7px 20px -5px rgba(0,0,0,0.2);
+
+
+}

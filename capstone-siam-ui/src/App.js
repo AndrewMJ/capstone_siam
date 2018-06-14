@@ -6,7 +6,8 @@ import Home from './components/Home';
 import Details from './components/Details';
 import NavBar from './components/NavBar';
 import History from './components/History';
-import Search from './components/Search'
+import Search from './components/Search';
+import Welcome from './components/Welcome';
 
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
         <Route exact path = "/details/:id" component = {Details}/>
         <Route exact path = "/history/:id" component = {History}/>
         <Route exact path = "/search" component = {Search} />
+        <Route exact path = "/" component = {Welcome}/>
         </div>
       </Router>
     );

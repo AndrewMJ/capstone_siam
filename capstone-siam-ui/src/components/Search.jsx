@@ -7,7 +7,11 @@ class Search extends Component {
 
 	render(){
 		return (
-			<h1> This is search </h1>
+			<div>
+				<div>
+					<h1>Search for a device by ID number</h1>
+				</div>
+			</div>
 
 			)
 	}

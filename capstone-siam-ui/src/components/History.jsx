@@ -11,15 +11,15 @@ class History extends Component{
 			historyLog: [],
 			graphData: [ 
 					   {
-					    label: "Success",
+					    label: "Connected",
 					    data: [{ x: "6/13", y: 0}, { x: "6/14", y: 0}]
 					  },
 					  {
-					    label: "Disconnected",
+					    label: "Shutdown",
 					    data: [{ x: "6/13", y: 0 }, { x: "6/14", y: 0}]
 					  },
 					  {
-					    label: "Shutdown",
+					    label: "Disconnected",
 					    data: [{ x: "6/13", y: 0 }, { x: "6/14", y: 0}]
 					  }
 					]
@@ -47,13 +47,13 @@ class History extends Component{
 							})
 						} else if(splitString[j] === " Message: IP_DEST_HOST_UNREACHABLE " && splitString[4].substring(0, 17) === " Date: Wed Jun 13"){
 							let stateCopy = this.state.graphData.slice()
-							stateCopy[1].data[0].y++
+							stateCopy[2].data[0].y++
 							this.setState({
 								graphData: stateCopy
 							})						
 						} else if(splitString[j].includes(" Message: Timeout reached after " && splitString[4].substring(0, 17) === " Date: Wed Jun 13")) {
 							let stateCopy = this.state.graphData.slice()
-							stateCopy[2].data[0].y++
+							stateCopy[1].data[0].y++
 							this.setState({
 								graphData: stateCopy
 							})
@@ -65,13 +65,13 @@ class History extends Component{
 							})
 						} else if(splitString[j] === " Message: IP_DEST_HOST_UNREACHABLE " && splitString[4].substring(0, 17) === " Date: Thu Jun 14"){
 							let stateCopy = this.state.graphData.slice()
-							stateCopy[1].data[1].y++
+							stateCopy[2].data[1].y++
 							this.setState({
 								graphData: stateCopy
 							})						
 						} else if(splitString[j].includes(" Message: Timeout reached after " && splitString[4].substring(0, 17) === " Date: Thu Jun 14")) {
 							let stateCopy = this.state.graphData.slice()
-							stateCopy[2].data[1].y++
+							stateCopy[1].data[1].y++
 							this.setState({
 								graphData: stateCopy
 							})
@@ -105,11 +105,12 @@ class History extends Component{
 	render(){
 		const view = this.state.historyLog;
 		const data = this.state.graphData;
+		const id = this.props.match.params.id;
 
 
 		return(
 			<div className="text-center">
-			<h1>Daily History for Shared Space Devices</h1>
+			<h1>Daily History for Device Number: {id} </h1>
 			<br/>
 				<div className="col-sm-4">
 				</div>	
@@ -121,7 +122,6 @@ class History extends Component{
 					  <Series type={Bar} />
 					  <Cursor primary />
 					  <Cursor />
-					  <Tooltip />
 
 					</Chart>
 
@@ -138,11 +138,12 @@ class History extends Component{
 					</div>
 				</div>
 
-				<div className="col-sm-4 text-left">
+				<div className="font col-sm-4 text-left">
 					<ul>
-						<li>BLUE: CONNECTED</li>
-						<li>RED: DISCONNECTED</li>
+						<li>GREEN: CONNECTED</li>
 						<li>YELLOW: SHUTDOWN</li>
+						<li>RED: DISCONNECTED</li>
+						
 					</ul>
 				</div>	
 			</div>
