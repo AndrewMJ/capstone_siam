@@ -78,11 +78,8 @@ ul {
     box-shadow: 0 7px 20px -5px rgba(0,0,0,0.2);
 }
 
-.img{
-    width:500px;
-    height:500px;
-    border-radius:5px;
-    box-shadow: 0 7px 20px -5px rgba(0,0,0,0.2);
-
-
+.carousel-image {
+    margin: 0 auto;
+    width: 600px;
+    height: 600px;
 }

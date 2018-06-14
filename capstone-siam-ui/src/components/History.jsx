@@ -122,6 +122,7 @@ class History extends Component{
 					  <Series type={Bar} />
 					  <Cursor primary />
 					  <Cursor />
+					  <Tooltip />
 
 					</Chart>
 
